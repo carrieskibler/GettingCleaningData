@@ -71,9 +71,7 @@ all_col_names <- colnames(merge_all)
 mean_std <- (grepl ("activityid", all_col_names) | grepl ("subjectid",all_col_names) | 
                grepl("mean..",all_col_names) | grepl("std..",all_col_names))
 mean_std_true <- merge_all[ , mean_std == TRUE]
-set_activity_names <- merge(mean_std_true, activity_labels,
-                              by='activityid',
-                              all.x=TRUE)
+set_activity_names <- merge(mean_std_true, activity_labels, by='activityid', all.x=TRUE)
 set2 <- aggregate(. ~subjectid + activityid, set_activity_names, mean)
 set2 <- set2[order(set2$subjectid, set2$activityid),]
 write.table(set2, "set2.txt", row.name=FALSE)
